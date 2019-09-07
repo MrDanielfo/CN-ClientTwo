@@ -10,6 +10,7 @@ import Restaurants from '../components/Restaurants/Restaurants';
 import Login from '../components/Login/Login';
 import Register from '../components/Register/Register';
 import Categories from '../components/Categories/Categories';
+import RestaurantSingle from '../components/Restaurants/RestaurantSingle';
 
 const PublicRoute = ({ component : Component, ...rest }) => ( 
     <Route {...rest} render={ props => <Component {...props} /> } />
@@ -48,6 +49,12 @@ const Routing = ({ userLogged , handleLoggin }) => {
                 userLogged={userLogged}
                 handle
                 component={() => <Restaurants handleLoggin={handleLoggin} />}
+              />
+
+              <PrivateRoute
+                exact path="/restaurants/:id"
+                userLogged={userLogged}
+                component={RestaurantSingle}
               />
 
               <PrivateRoute
