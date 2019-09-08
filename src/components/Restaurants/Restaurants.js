@@ -11,6 +11,7 @@ const RESTAURANTS_QUERY = gql `
             address
             restaurantImage
             restaurantCategoryID {
+                _id
                 name
             }
         }
@@ -37,7 +38,6 @@ const Restaurants = () => {
                     ({loading, error, data : { getRestaurants } }) => {
                         if(loading) return (<p>Pidiendo restaurants...</p>);
                         if(error) return null;
-                        console.log(getRestaurants)   
                         return (
                           <div className="row col-md-12 justify-content-around my-5">
                             {getRestaurants.map(restaurant => (

@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 import NoImage  from '../../assets/NoImage.png';
+import { Link } from 'react-router-dom'
 
 const Categorie = ({ rCategory, propStyle, cardStyle }) => {
     return (
@@ -13,7 +14,11 @@ const Categorie = ({ rCategory, propStyle, cardStyle }) => {
                     :
                     <img style={propStyle} src={NoImage} alt={rCategory.name} />
                 }
-                
+            </div>
+            <div className="card-footer">
+                <Link to={`/categories/${rCategory._id}`} className="btn btn-danger my-2">
+                    Ver más
+                </Link>
             </div>
         </div>
     )

@@ -11,6 +11,7 @@ import Login from '../components/Login/Login';
 import Register from '../components/Register/Register';
 import Categories from '../components/Categories/Categories';
 import RestaurantSingle from '../components/Restaurants/RestaurantSingle';
+import CategorieSingle from '../components/Categories/CategorieSingle';
 
 const PublicRoute = ({ component : Component, ...rest }) => ( 
     <Route {...rest} render={ props => <Component {...props} /> } />
@@ -63,6 +64,12 @@ const Routing = ({ userLogged , handleLoggin }) => {
                 userLogged={userLogged}
                 handle
                 component={() => <Categories handleLoggin={handleLoggin} />}
+              />
+
+              <PrivateRoute
+                exact path="/categories/:id"
+                userLogged={userLogged}
+                component={CategorieSingle}
               />
 
               <PrivateRoute
