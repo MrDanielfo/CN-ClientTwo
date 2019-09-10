@@ -12,6 +12,7 @@ import Register from '../components/Register/Register';
 import Categories from '../components/Categories/Categories';
 import RestaurantSingle from '../components/Restaurants/RestaurantSingle';
 import CategorieSingle from '../components/Categories/CategorieSingle';
+import AddRestaurant from '../components/Restaurants/AddRestaurant';
 
 const PublicRoute = ({ component : Component, ...rest }) => ( 
     <Route {...rest} render={ props => <Component {...props} /> } />
@@ -53,7 +54,8 @@ const Routing = ({ userLogged , handleLoggin }) => {
               />
 
               <PrivateRoute
-                exact path="/restaurants/:id"
+                exact
+                path="/restaurants/:id"
                 userLogged={userLogged}
                 component={RestaurantSingle}
               />
@@ -67,9 +69,17 @@ const Routing = ({ userLogged , handleLoggin }) => {
               />
 
               <PrivateRoute
-                exact path="/categories/:id"
+                exact
+                path="/categories/:id"
                 userLogged={userLogged}
                 component={CategorieSingle}
+              />
+
+              <PrivateRoute
+                exact
+                path="/add-restaurant"
+                userLogged={userLogged}
+                component={AddRestaurant}
               />
 
               <PrivateRoute

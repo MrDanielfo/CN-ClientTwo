@@ -18,6 +18,11 @@ const NavBar = () => {
           </Link>
         </li>
         <li className="nav-item">
+          <Link to="/add-restaurant" className="nav-link">
+            Agregar Restaurant
+          </Link>
+        </li>
+        <li className="nav-item">
           <Link to="/logout" className="nav-link">
             Cerrar Sesión
           </Link>
