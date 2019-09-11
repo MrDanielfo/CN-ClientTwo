@@ -13,6 +13,8 @@ import Categories from '../components/Categories/Categories';
 import RestaurantSingle from '../components/Restaurants/RestaurantSingle';
 import CategorieSingle from '../components/Categories/CategorieSingle';
 import AddRestaurant from '../components/Restaurants/AddRestaurant';
+import MenuCategories from '../components/Menus/MenuCategories';
+import MenuSingleCategory from '../components/Menus/MenuSingleCategory';
 
 const PublicRoute = ({ component : Component, ...rest }) => ( 
     <Route {...rest} render={ props => <Component {...props} /> } />
@@ -83,6 +85,21 @@ const Routing = ({ userLogged , handleLoggin }) => {
                 path="/add-restaurant"
                 userLogged={userLogged}
                 component={AddRestaurant}
+              />
+
+              <PrivateRoute
+                exact
+                path="/menus"
+                userLogged={userLogged}
+                handle
+                component={() => <MenuCategories handleLoggin={handleLoggin} />}
+              />
+
+              <PrivateRoute
+                exact
+                path="/menus/:id"
+                userLogged={userLogged}
+                component={MenuSingleCategory}
               />
 
               <PrivateRoute

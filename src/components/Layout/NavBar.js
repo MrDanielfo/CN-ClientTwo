@@ -25,6 +25,11 @@ const NavBar = ({userLogged}) => {
           </Link>
         </li>
         <li className="nav-item">
+          <Link to="/menus" className="nav-link">
+            Menús
+          </Link>
+        </li>
+        <li className="nav-item">
           <Link to="/logout" className="nav-link">
             Cerrar Sesión
           </Link>
