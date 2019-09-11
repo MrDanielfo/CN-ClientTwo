@@ -53,7 +53,7 @@ const AddRestaurantForm = ({ handleFormSubmit }) => {
             restaurantImage,
             restaurantCategoryID
         };
-        console.log(nuevoRestaurant)
+        console.log(nuevoRestaurant);
         handleFormSubmit(nuevoRestaurant);
     }
 

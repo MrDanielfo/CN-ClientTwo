@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
-const Container = () => {
+const Container = ({ userLogged }) => {
 
-    const token = localStorage.getItem('jwt');
+    const token = userLogged
 
     const authLinks = (
       <Fragment>

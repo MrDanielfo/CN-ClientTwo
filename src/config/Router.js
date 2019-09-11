@@ -28,10 +28,13 @@ const Routing = ({ userLogged , handleLoggin }) => {
     return (
       <Router>
         <Fragment>
-          <NavBar />
+          <PublicRoute
+            component={() => <NavBar userLogged={userLogged} />}
+          />
+          
           <div className="container">
             <Switch>
-              <PublicRoute exact path="/" component={Container} />
+              <PublicRoute exact path="/" component={() => <Container userLogged={userLogged}  />} />
               <PublicRoute
                 exact
                 path="/login"

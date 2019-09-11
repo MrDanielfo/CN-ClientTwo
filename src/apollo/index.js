@@ -2,14 +2,17 @@ import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { createUploadLink } from 'apollo-upload-client';
 import { onError } from 'apollo-link-error';
-import { ApolloLink } from 'apollo-link';
+import { ApolloLink, split } from 'apollo-link';
 import { withClientState } from 'apollo-link-state';
+import { WebSocketLink } from 'apollo-link-ws';
+import { getMainDefinition } from 'apollo-utilities';
 
 import defaults from './defaults';
 import resolvers from './resolvers';
 
 
 const HTTP_HOST = 'http://localhost:4000/graphql';
+const WSS_HOST = 'ws://localhost:4000/graphql';
 
 
 const cache = new InMemoryCache();
@@ -23,6 +26,25 @@ const stateLink = withClientState({
 const httpLink = new createUploadLink({
     uri: HTTP_HOST,
 });
+
+const wssLink = new WebSocketLink({
+    uri: WSS_HOST,
+    options: {
+        reconnect: true
+    }
+});
+
+const link = split(
+    ({ query }) => {
+        const definition = getMainDefinition(query);
+        return (
+            definition.kind === 'OperationDefinition' &&
+            definition.operation === 'subscription'
+        );
+    },
+    wssLink,
+    httpLink
+)
 
 const AuthLink = (operation, next) => {
     const token = localStorage.getItem('jwt');
@@ -58,7 +80,7 @@ const client = new ApolloClient({
         }),
         stateLink,
         AuthLink,
-        httpLink
+        link
     ]),
     cache,
 });

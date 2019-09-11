@@ -1,8 +1,10 @@
 import React, { Fragment } from 'react';
 import Router from './config/Router';
-import { Query } from 'react-apollo';
+import { Query, Subscription } from 'react-apollo';
 import gql from 'graphql-tag';
 import client from './apollo';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
+
 
 const LOGGED_USER = gql`
   query {
@@ -10,6 +12,15 @@ const LOGGED_USER = gql`
       userLogged
     }
   }
+`;
+
+const RESTAURANT_ADDED = gql`
+subscription {
+  restaurantAdded {
+    name
+    address
+  }
+}
 `;
 
 function App() {
@@ -30,6 +41,16 @@ function App() {
 
   return (
     <Fragment>
+
+      <Subscription subscription={RESTAURANT_ADDED}>
+        {
+          ({ data }) => {
+            if (data) NotificationManager.success('Success message', data.restaurantAdded.name);
+            return <NotificationContainer />;
+          }
+        }
+      </Subscription>
+      
       <Query query={LOGGED_USER}>
         {({ data: { loginState } }) => {
           return (
@@ -45,3 +66,5 @@ function App() {
 }
 
 export default App;
+
+       

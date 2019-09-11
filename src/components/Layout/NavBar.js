@@ -1,9 +1,11 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
-const NavBar = () => {
+const NavBar = ({userLogged}) => {
 
-    const token = localStorage.getItem('jwt');
+    
+
+    const logged = userLogged
 
     const authLinks = (
       <Fragment>
@@ -55,7 +57,7 @@ const NavBar = () => {
             </button>
             <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav">
-                    { token ? authLinks : guestLinks }
+                    { logged ? authLinks : guestLinks }
                 </ul>
             </div>
         </nav>

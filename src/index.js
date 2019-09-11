@@ -5,6 +5,7 @@ import { ApolloProvider } from 'react-apollo';
 // Se quitó porque se importó un tema de bootswatch llamado Litera
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
+import 'react-notifications/dist/react-notifications.css';
 import client from './apollo/index';
 
 import './index.css';
